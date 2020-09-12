@@ -1,0 +1,39 @@
+buildscript {
+    // ext : bulid.gradle에서 사용하는 전역변수를 설정하겠다는 의미 (여기서는 스프링부트2.1.7을 의존성으로 받겟다.)
+    ext {
+        springBootVersion = '2.1.7.RELEASE'
+    }
+
+    //리포지토니는 의존성 라이브러리를 어떤 원격 저장소에 받을 지 선택
+    // 아래는 메이븐과 jcenter에서 받는데 jcenter가 더 간단하게
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management' // 스프링 부트의 의존성을 관리해주는 플러그인
+// 위의 4개는 자주 사용된다.
+
+
+group 'spring_boot'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+// 프로젝트 의존성들 선언
+// 특정버전을 명시하지 않아야 맨위의 버전을 따라감
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
